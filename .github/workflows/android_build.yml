@@ -14,11 +14,15 @@ jobs:
       STORE_KEYPWD : ${{secrets.STORE_KEYPWD}}
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set Up JDK
-        uses: action/setup-java@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: '11'
+          distribution: 'adopt'
+
 
       - name: Run Tests
         run: ./gradlew testCustomerProdRelease

@@ -19,7 +19,14 @@ android {
             useSupportLibrary = true
         }
     }
-
+    signingConfigs {
+        create("release") {
+            storeFile = file("../singing/store.jks")
+            storePassword = System.getenv("KSTOREPWD")
+            keyAlias = "store"
+            keyPassword = System.getenv("KEYPWD")
+        }
+    }
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
@@ -27,18 +34,19 @@ android {
         }
 
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
 
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -68,10 +76,10 @@ android {
             versionNameSuffix = "-merchant"
         }
 
-        create("manager") {
+        create("admin") {
             dimension = "client"
-            applicationIdSuffix = ".manager"
-            versionNameSuffix = "-manager"
+            applicationIdSuffix = ".admin"
+            versionNameSuffix = "-admin"
         }
 
         create("dev") {
@@ -93,16 +101,16 @@ android {
 
 }
 
-androidComponents {
-    beforeVariants { variantBuilder ->
-        if (variantBuilder.productFlavors.contains("version" to "prod")) {
-            variantBuilder.enable = false
-        }
-        if (variantBuilder.buildType.equals("release")) {
-            variantBuilder.enable = false
-        }
-    }
-}
+//androidComponents {
+//    beforeVariants { variantBuilder ->
+//        if (variantBuilder.productFlavors.contains("version" to "prod")) {
+//            variantBuilder.enable = false
+//        }
+//        if (variantBuilder.buildType.equals("release")) {
+//            variantBuilder.enable = false
+//        }
+//    }
+//}
 
 dependencies {
 

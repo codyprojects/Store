@@ -14,9 +14,9 @@ jobs:
       STORE_KEYPWD : ${{secrets.STORE_KEYPWD}}
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Set Up JDK
-        uses: action/setup-java@v1
+        uses: action/setup-java@v2
         with:
           java-version: 11
 

@@ -22,9 +22,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../singing/store.jks")
-            storePassword = System.getenv("KSTOREPWD")
+            storePassword = System.getenv("STORE_KSTOREPWD")
             keyAlias = "store"
-            keyPassword = System.getenv("KEYPWD")
+            keyPassword = System.getenv("STORE_KEYPWD")
         }
     }
     buildTypes {
